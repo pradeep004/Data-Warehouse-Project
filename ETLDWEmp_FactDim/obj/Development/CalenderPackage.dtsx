@@ -1,0 +1,908 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/17/2021 8:39:27 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DELL-LMA8QI7"
+  DTS:CreatorName="DELL-LMA8QI7\VJ"
+  DTS:DTSID="{26D1BDF8-8A17-4901-8059-77834E3CE256}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.150"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{0188760A-6343-4DCD-B2EB-3BFA57C594BB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DELL-LMA8QI7.DBEmp]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{91BBA7AE-DABB-4299-B8E0-61EA785152A4}"
+      DTS:ObjectName="DELL-LMA8QI7.DBEmp">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DELL-LMA8QI7;Initial Catalog=DBEmp;Integrated Security=True;Application Name=SSIS-Package1-{91BBA7AE-DABB-4299-B8E0-61EA785152A4}DELL-LMA8QI7.DBEmp;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DELL-LMA8QI7.dw1]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{06D2D262-01DB-436F-836C-D948E321878F}"
+      DTS:ObjectName="DELL-LMA8QI7.dw1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DELL-LMA8QI7;Initial Catalog=dw;Integrated Security=True;Application Name=SSIS-Package1-{06D2D262-01DB-436F-836C-D948E321878F}DELL-LMA8QI7.dw1;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DELL-LMA8QI7.DWEmp]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{D9C86DEA-F421-45AF-88B0-E8ED02206AC7}"
+      DTS:ObjectName="DELL-LMA8QI7.DWEmp">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DELL-LMA8QI7;Initial Catalog=DWEmp;Integrated Security=True;Application Name=SSIS-Package1-{D9C86DEA-F421-45AF-88B0-E8ED02206AC7}DELL-LMA8QI7.DWEmp;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\calanderDim Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{BB4227F0-3E90-4CFD-9B3D-F76321E9B913}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="calanderDim Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\calanderDim Data Flow Task\ADO NET Source 1"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source 1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select distinct hire_date
+from   employee.employees</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\calanderDim Data Flow Task\ADO NET Source 1.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DELL-LMA8QI7.DBEmp]"
+                  connectionManagerRefId="Package.ConnectionManagers[DELL-LMA8QI7.DBEmp]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[hire_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[hire_date]"
+                      lineageId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[hire_date]"
+                      name="hire_date"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].ExternalColumns[hire_date]"
+                      dataType="dbDate"
+                      name="hire_date" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[hire_date]"
+                      dataType="dbDate"
+                      lineageId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[hire_date]"
+                      name="hire_date" />
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="calander_dim ADO NET Destination"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."calendar_dim"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DELL-LMA8QI7.dw1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DELL-LMA8QI7.dw1]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].Columns[date]"
+                      cachedDataType="dbDate"
+                      cachedName="date"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[fullDate]"
+                      lineageId="Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output].Columns[date]" />
+                    <inputColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].Columns[monthof]"
+                      cachedDataType="i4"
+                      cachedName="monthof"
+                      externalMetadataColumnId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[monthOfDate]"
+                      lineageId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[monthof]" />
+                    <inputColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].Columns[quarterof]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="quarterof"
+                      externalMetadataColumnId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[quaterOfDate]"
+                      lineageId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[quarterof]" />
+                    <inputColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].Columns[yearof]"
+                      cachedDataType="i4"
+                      cachedName="yearof"
+                      externalMetadataColumnId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[yearOfDate]"
+                      lineageId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[yearof]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[calendarKey]"
+                      dataType="i4"
+                      name="calendarKey" />
+                    <externalMetadataColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[fullDate]"
+                      dataType="dbTimeStamp"
+                      name="fullDate" />
+                    <externalMetadataColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[monthOfDate]"
+                      dataType="wstr"
+                      length="10"
+                      name="monthOfDate" />
+                    <externalMetadataColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[quaterOfDate]"
+                      dataType="wstr"
+                      length="2"
+                      name="quaterOfDate" />
+                    <externalMetadataColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[yearOfDate]"
+                      dataType="i4"
+                      name="yearOfDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\calanderDim Data Flow Task\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\calanderDim Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\calanderDim Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[date]"
+                      cachedDataType="dbDate"
+                      cachedName="date"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output].Columns[date]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\calanderDim Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[monthof]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[monthof]"
+                      name="monthof"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[MONTH](#{Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output].Columns[date]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">MONTH(date)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[yearof]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[yearof]"
+                      name="yearof"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[YEAR](#{Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output].Columns[date]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">YEAR(date)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[quarterof]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="2"
+                      lineageId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[quarterof]"
+                      name="quarterof"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">([DATEPART]("qq",#{Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output].Columns[date]}) == 1 ? "Q1" : [DATEPART]("qq",#{Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output].Columns[date]}) == 2 ? "Q2" : [DATEPART]("qq",#{Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output].Columns[date]}) == 3 ? "Q3" : [DATEPART]("qq",#{Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output].Columns[date]}) == 4 ? "Q4" : "")</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DATEPART("qq",date) == 1 ? "Q1" : DATEPART("qq",date) == 2 ? "Q2" : DATEPART("qq",date) == 3 ? "Q3" : DATEPART("qq",date) == 4 ? "Q4" : "")</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\calanderDim Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="dw_employee ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select distinct birth_date
+from   employee.employees</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"employee"."employees"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DELL-LMA8QI7.DBEmp]"
+                  connectionManagerRefId="Package.ConnectionManagers[DELL-LMA8QI7.DBEmp]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Output].Columns[birth_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[birth_date]"
+                      lineageId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Output].Columns[birth_date]"
+                      name="birth_date"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[birth_date]"
+                      dataType="dbDate"
+                      name="birth_date" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Error Output].Columns[birth_date]"
+                      dataType="dbDate"
+                      lineageId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Error Output].Columns[birth_date]"
+                      name="birth_date" />
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\calanderDim Data Flow Task\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\calanderDim Data Flow Task\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\calanderDim Data Flow Task\Sort.Inputs[Sort Input].Columns[date]"
+                      cachedDataType="dbDate"
+                      cachedName="date"
+                      lineageId="Package\calanderDim Data Flow Task\Union All.Outputs[Union All Output 1].Columns[date]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output].Columns[date]"
+                      dataType="dbDate"
+                      lineageId="Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output].Columns[date]"
+                      name="date"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\calanderDim Data Flow Task\Union All.Outputs[Union All Output 1].Columns[date]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\calanderDim Data Flow Task\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\calanderDim Data Flow Task\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\calanderDim Data Flow Task\Union All.Inputs[Union All Input 1].Columns[birth_date]"
+                      cachedDataType="dbDate"
+                      cachedName="birth_date"
+                      lineageId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Output].Columns[birth_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\calanderDim Data Flow Task\Union All.Outputs[Union All Output 1].Columns[date]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\calanderDim Data Flow Task\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\calanderDim Data Flow Task\Union All.Inputs[Union All Input 2].Columns[hire_date]"
+                      cachedDataType="dbDate"
+                      cachedName="hire_date"
+                      lineageId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output].Columns[hire_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\calanderDim Data Flow Task\Union All.Outputs[Union All Output 1].Columns[date]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\calanderDim Data Flow Task\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\calanderDim Data Flow Task\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\calanderDim Data Flow Task\Union All.Outputs[Union All Output 1].Columns[date]"
+                      dataType="dbDate"
+                      lineageId="Package\calanderDim Data Flow Task\Union All.Outputs[Union All Output 1].Columns[date]"
+                      name="date" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\calanderDim Data Flow Task.Paths[ADO NET Source Output]"
+              endId="Package\calanderDim Data Flow Task\Union All.Inputs[Union All Input 1]"
+              name="ADO NET Source Output"
+              startId="Package\calanderDim Data Flow Task\dw_employee ADO NET Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\calanderDim Data Flow Task.Paths[ADO NET Source Output1]"
+              endId="Package\calanderDim Data Flow Task\Union All.Inputs[Union All Input 2]"
+              name="ADO NET Source Output"
+              startId="Package\calanderDim Data Flow Task\ADO NET Source 1.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\calanderDim Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination.Inputs[ADO NET Destination Input]"
+              name="Derived Column Output"
+              startId="Package\calanderDim Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\calanderDim Data Flow Task.Paths[Sort Output]"
+              endId="Package\calanderDim Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="Sort Output"
+              startId="Package\calanderDim Data Flow Task\Sort.Outputs[Sort Output]" />
+            <path
+              refId="Package\calanderDim Data Flow Task.Paths[Union All Output 1]"
+              endId="Package\calanderDim Data Flow Task\Sort.Inputs[Sort Input]"
+              name="Union All Output 1"
+              startId="Package\calanderDim Data Flow Task\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="216,42.6666666666667"
+          Id="Package\calanderDim Data Flow Task"
+          TopLeft="299.999995529652,84.1578963209057" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\calanderDim Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="232,42.6666666666667"
+          Id="Package\calanderDim Data Flow Task\dw_employee ADO NET Source"
+          TopLeft="84.9999987334014,13.6842107838871" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\calanderDim Data Flow Task\ADO NET Source 1"
+          TopLeft="401.249994020909,15.0526318622758" />
+        <NodeLayout
+          Size="122.666666666667,42.6666666666667"
+          Id="Package\calanderDim Data Flow Task\Union All"
+          TopLeft="297.499995566905,100.57894926157" />
+        <EdgeLayout
+          Id="Package\calanderDim Data Flow Task.Paths[ADO NET Source Output]"
+          TopLeft="200.999998733401,56.3508774505538">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="157.833330166836,44.2280718110165"
+              Start="0,0"
+              End="157.833330166836,36.7280718110165">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.1140359055083" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.1140359055083"
+                    Point2="0,22.1140359055083"
+                    Point3="4,22.1140359055083" />
+                  <mssgle:LineSegment
+                    End="153.833330166836,22.1140359055083" />
+                  <mssgle:CubicBezierSegment
+                    Point1="153.833330166836,22.1140359055083"
+                    Point2="157.833330166836,22.1140359055083"
+                    Point3="157.833330166836,26.1140359055083" />
+                  <mssgle:LineSegment
+                    End="157.833330166836,36.7280718110165" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\calanderDim Data Flow Task.Paths[ADO NET Source Output1]"
+          TopLeft="487.249994020909,57.7192985289425">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-109.30555400956,42.8596507326278"
+              Start="0,0"
+              End="-109.30555400956,35.3596507326278">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.3846858416422" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.3846858416422"
+                    Point2="0,25.3846858416422"
+                    Point3="-4,25.3846858416422" />
+                  <mssgle:LineSegment
+                    End="-105.30555400956,25.3846858416422" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-105.30555400956,25.3846858416422"
+                    Point2="-109.30555400956,25.3846858416422"
+                    Point3="-109.30555400956,29.3846858416422" />
+                  <mssgle:LineSegment
+                    End="-109.30555400956,35.3596507326278" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="98.6666666666667,42"
+          Id="Package\calanderDim Data Flow Task\Sort"
+          TopLeft="474.374992931262,104.315791173655" />
+        <EdgeLayout
+          Id="Package\calanderDim Data Flow Task.Paths[Union All Output 1]"
+          TopLeft="420.166662233571,123.614036884279">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="54.2083306976904,0"
+              Start="0,0"
+              End="46.7083306976904,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="46.7083306976904,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="250.666666666667,42.6666666666667"
+          Id="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination"
+          TopLeft="238.124996451661,264.17544166159" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\calanderDim Data Flow Task\Derived Column"
+          TopLeft="444.999993368984,175.543861761208" />
+        <EdgeLayout
+          Id="Package\calanderDim Data Flow Task.Paths[Sort Output]"
+          TopLeft="523.354159816789,146.315791173655">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.2280705875527"
+              Start="0,0"
+              End="0,21.7280705875527">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.7280705875527" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\calanderDim Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="522.999993368984,218.210528427874">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-159.541663583989,45.9649132337157"
+              Start="0,0"
+              End="-159.541663583989,38.4649132337157">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.9824566168578" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.9824566168578"
+                    Point2="0,22.9824566168578"
+                    Point3="-4,22.9824566168578" />
+                  <mssgle:LineSegment
+                    End="-155.541663583989,22.9824566168578" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-155.541663583989,22.9824566168578"
+                    Point2="-159.541663583989,22.9824566168578"
+                    Point3="-159.541663583989,26.9824566168578" />
+                  <mssgle:LineSegment
+                    End="-159.541663583989,38.4649132337157" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\calanderDim Data Flow Task\dw_employee ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\calanderDim Data Flow Task\ADO NET Source 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\calanderDim Data Flow Task\calander_dim ADO NET Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

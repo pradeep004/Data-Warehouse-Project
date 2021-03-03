@@ -1,0 +1,1314 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/17/2021 8:07:56 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DELL-LMA8QI7"
+  DTS:CreatorName="DELL-LMA8QI7\VJ"
+  DTS:DTSID="{5A4A477E-00FD-4289-9044-A2B48AAA9D78}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.150"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{A963ED12-D92A-4953-A407-8C819542C885}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DELL-LMA8QI7.DBEmp1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0E090960-8752-4E41-9E42-BE7EEB131CDC}"
+      DTS:ObjectName="DELL-LMA8QI7.DBEmp1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DELL-LMA8QI7;Initial Catalog=DBEmp;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DELL-LMA8QI7.dw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5C2C4D37-EC8F-4323-85F1-63D7CB213C5B}"
+      DTS:ObjectName="DELL-LMA8QI7.dw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DELL-LMA8QI7;Initial Catalog=dw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\FactSalary Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A718D99A-5134-462C-AC7D-0DE75685A2BE}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FactSalary Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\FactSalary Data Flow Task\dw OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="dw OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT employee.employees.emp_no, employee.salaries.salary, employee.dept_emp.dept_no, employee.salaries.to_date, employee.employees.birth_date, employee.employees.hire_date
+FROM   employee.employees INNER JOIN
+             employee.salaries ON employee.employees.emp_no = employee.salaries.emp_no INNER JOIN
+             employee.dept_emp ON employee.employees.emp_no = employee.dept_emp.emp_no</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DELL-LMA8QI7.DBEmp1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DELL-LMA8QI7.DBEmp1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[emp_no]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[emp_no]"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[emp_no]"
+                      name="emp_no"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[dept_no]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[dept_no]"
+                      length="4"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[dept_no]"
+                      name="dept_no"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[to_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[to_date]"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[to_date]"
+                      name="to_date"
+                      sortKeyPosition="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[salary]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[salary]"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[salary]"
+                      name="salary"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[birth_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[birth_date]"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[birth_date]"
+                      name="birth_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[hire_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[hire_date]"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[hire_date]"
+                      name="hire_date"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[emp_no]"
+                      dataType="i4"
+                      name="emp_no" />
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[dept_no]"
+                      dataType="wstr"
+                      length="4"
+                      name="dept_no" />
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[to_date]"
+                      dataType="dbDate"
+                      name="to_date" />
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[salary]"
+                      dataType="i4"
+                      name="salary" />
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[birth_date]"
+                      dataType="dbDate"
+                      name="birth_date" />
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[hire_date]"
+                      dataType="dbDate"
+                      name="hire_date" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[emp_no]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[emp_no]"
+                      name="emp_no" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[salary]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[salary]"
+                      name="salary" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[to_date]"
+                      dataType="dbDate"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[to_date]"
+                      name="to_date" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dept_no]"
+                      dataType="wstr"
+                      length="4"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[dept_no]"
+                      name="dept_no" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[birth_date]"
+                      dataType="dbDate"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[birth_date]"
+                      name="birth_date" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[hire_date]"
+                      dataType="dbDate"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[hire_date]"
+                      name="hire_date" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="dw_distinct OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select t.emp_no, max(t.to_date) Fdate from employee.titles t
+group by t.emp_no
+order by t.emp_no</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DELL-LMA8QI7.DBEmp1]"
+                  connectionManagerRefId="Package.ConnectionManagers[DELL-LMA8QI7.DBEmp1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output]"
+                  isSorted="true"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output].Columns[emp_no]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[emp_no]"
+                      lineageId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output].Columns[emp_no]"
+                      name="emp_no"
+                      sortKeyPosition="1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output].Columns[Fdate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Fdate]"
+                      lineageId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output].Columns[Fdate]"
+                      name="Fdate"
+                      sortKeyPosition="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[emp_no]"
+                      dataType="i4"
+                      name="emp_no" />
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Fdate]"
+                      dataType="dbDate"
+                      name="Fdate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Error Output].Columns[emp_no]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Error Output].Columns[emp_no]"
+                      name="emp_no" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Fdate]"
+                      dataType="dbDate"
+                      lineageId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Fdate]"
+                      name="Fdate" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="FactSalary OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactSalary]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DELL-LMA8QI7.dw]"
+                  connectionManagerRefId="Package.ConnectionManagers[DELL-LMA8QI7.dw]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].Columns[salary]"
+                      cachedDataType="i4"
+                      cachedName="salary"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[salary]"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[salary]" />
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].Columns[emp_no]"
+                      cachedDataType="i4"
+                      cachedName="emp_no"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[empNo]"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[emp_no]" />
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].Columns[dept_no]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="dept_no"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[deptNo]"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[dept_no]" />
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].Columns[calendarKey]"
+                      cachedDataType="i4"
+                      cachedName="calendarKey"
+                      externalMetadataColumnId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[calendarKey]"
+                      lineageId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[calendarKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[empNo]"
+                      dataType="i4"
+                      name="empNo" />
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[deptNo]"
+                      dataType="wstr"
+                      length="50"
+                      name="deptNo" />
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[salary]"
+                      dataType="i4"
+                      name="salary" />
+                    <externalMetadataColumn
+                      refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[calendarKey]"
+                      dataType="i4"
+                      name="calendarKey" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactSalary Data Flow Task\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[calendar_dim]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[calendar_dim]) [refTable]
+where [refTable].[fullDate] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="calendarKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="fullDate" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="monthOfDate" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="quaterOfDate" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="yearOfDate" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[birth_date]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactSalary Data Flow Task\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DELL-LMA8QI7.dw]"
+                  connectionManagerRefId="Package.ConnectionManagers[DELL-LMA8QI7.dw]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FactSalary Data Flow Task\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\Lookup.Inputs[Lookup Input].Columns[birth_date]"
+                      cachedDataType="dbDate"
+                      cachedName="birth_date"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[birth_date]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">fullDate</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\FactSalary Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[calendarKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup Match Output].Columns[calendarKey]"
+                      name="calendarKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">calendarKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\FactSalary Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\FactSalary Data Flow Task\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactSalary Data Flow Task\Lookup 1"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup 1"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[calendar_dim]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[calendar_dim]) [refTable]
+where [refTable].[fullDate] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="calendarKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="fullDate" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="monthOfDate" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="quaterOfDate" dataType="DT_STR" length="2" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="yearOfDate" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[hire_date]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactSalary Data Flow Task\Lookup 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DELL-LMA8QI7.dw]"
+                  connectionManagerRefId="Package.ConnectionManagers[DELL-LMA8QI7.dw]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FactSalary Data Flow Task\Lookup 1.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\Lookup 1.Inputs[Lookup Input].Columns[hire_date]"
+                      cachedDataType="dbDate"
+                      cachedName="hire_date"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[hire_date]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">fullDate</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactSalary Data Flow Task\Lookup 1.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\FactSalary Data Flow Task\Lookup 1.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactSalary Data Flow Task\Lookup 1.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\FactSalary Data Flow Task\Lookup 1.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactSalary Data Flow Task\Lookup 1.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\FactSalary Data Flow Task\Lookup 1.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\Lookup 1.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactSalary Data Flow Task\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">2</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[emp_no]"
+                      cachedDataType="i4"
+                      cachedName="emp_no"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output].Columns[emp_no]" />
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[Fdate]"
+                      cachedDataType="dbDate"
+                      cachedName="Fdate"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output].Columns[Fdate]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[emp_no]"
+                      cachedDataType="i4"
+                      cachedName="emp_no"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[emp_no]" />
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[to_date]"
+                      cachedDataType="dbDate"
+                      cachedName="to_date"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[to_date]" />
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[dept_no]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="dept_no"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[dept_no]" />
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[salary]"
+                      cachedDataType="i4"
+                      cachedName="salary"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[salary]" />
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[birth_date]"
+                      cachedDataType="dbDate"
+                      cachedName="birth_date"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[birth_date]" />
+                    <inputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[hire_date]"
+                      cachedDataType="dbDate"
+                      cachedName="hire_date"
+                      lineageId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output].Columns[hire_date]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[emp_no]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[emp_no]"
+                      name="emp_no"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[emp_no]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[dept_no]"
+                      dataType="wstr"
+                      length="4"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[dept_no]"
+                      name="dept_no">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[dept_no]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[salary]"
+                      dataType="i4"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[salary]"
+                      name="salary">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[salary]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[to_date]"
+                      dataType="dbDate"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[to_date]"
+                      name="to_date"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[to_date]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[birth_date]"
+                      dataType="dbDate"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[birth_date]"
+                      name="birth_date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[birth_date]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[hire_date]"
+                      dataType="dbDate"
+                      lineageId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[hire_date]"
+                      name="hire_date">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[hire_date]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\FactSalary Data Flow Task.Paths[Lookup Match Output]"
+              endId="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\FactSalary Data Flow Task\Lookup 1.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\FactSalary Data Flow Task.Paths[Lookup Match Output1]"
+              endId="Package\FactSalary Data Flow Task\Lookup 1.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\FactSalary Data Flow Task\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\FactSalary Data Flow Task.Paths[Merge Join Output]"
+              endId="Package\FactSalary Data Flow Task\Lookup.Inputs[Lookup Input]"
+              name="Merge Join Output"
+              startId="Package\FactSalary Data Flow Task\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\FactSalary Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Left Input]"
+              name="OLE DB Source Output"
+              startId="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\FactSalary Data Flow Task.Paths[OLE DB Source Output1]"
+              endId="Package\FactSalary Data Flow Task\Merge Join.Inputs[Merge Join Right Input]"
+              name="OLE DB Source Output"
+              startId="Package\FactSalary Data Flow Task\dw OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="208,42.6666666666667"
+          Id="Package\FactSalary Data Flow Task"
+          TopLeft="278.749995846301,86.8947384776831" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\FactSalary Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="229.333333333334,42.6666666666667"
+          Id="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination"
+          TopLeft="211.874996842817,229.210530630109" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\FactSalary Data Flow Task\dw OLE DB Source"
+          TopLeft="376.874994384125,60.0526316175831" />
+        <NodeLayout
+          Size="114.666666666667,42.6666666666667"
+          Id="Package\FactSalary Data Flow Task\Lookup"
+          TopLeft="495.624992614612,140.982457840322" />
+        <NodeLayout
+          Size="210.666666666667,42.6666666666667"
+          Id="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source"
+          TopLeft="103.124998463318,58.8771931369989" />
+        <NodeLayout
+          Size="124,42.6666666666667"
+          Id="Package\FactSalary Data Flow Task\Lookup 1"
+          TopLeft="494.999992623925,228.403510536293" />
+        <EdgeLayout
+          Id="Package\FactSalary Data Flow Task.Paths[Lookup Match Output]"
+          TopLeft="494.999992623925,250.140353916535">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-53.7916624477754,0"
+              Start="0,0"
+              End="-46.2916624477754,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-46.2916624477754,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-71.3372179426377,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FactSalary Data Flow Task.Paths[Lookup Match Output1]"
+          TopLeft="554.979159285935,183.649124506988">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.7543860293051"
+              Start="0,0"
+              End="0,37.2543860293051">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.2543860293051" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,12.8225055146526,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="132,42.6666666666667"
+          Id="Package\FactSalary Data Flow Task\Merge Join"
+          TopLeft="274.374995911494,139.473685781711" />
+        <EdgeLayout
+          Id="Package\FactSalary Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="208.458331796651,101.543859803666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="111.249997448176,37.9298259780458"
+              Start="0,0"
+              End="111.249997448176,30.4298259780458">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.4853459390811" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.4853459390811"
+                    Point2="0,22.4853459390811"
+                    Point3="4,22.4853459390811" />
+                  <mssgle:LineSegment
+                    End="107.249997448176,22.4853459390811" />
+                  <mssgle:CubicBezierSegment
+                    Point1="107.249997448176,22.4853459390811"
+                    Point2="111.249997448176,22.4853459390811"
+                    Point3="111.249997448176,26.4853459390811" />
+                  <mssgle:LineSegment
+                    End="111.249997448176,30.4298259780458" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FactSalary Data Flow Task.Paths[OLE DB Source Output1]"
+          TopLeft="462.874994384125,102.71929828425">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-101.833331805964,36.7543874974617"
+              Start="0,0"
+              End="-101.833331805964,29.2543874974617">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.7885291152617" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.7885291152617"
+                    Point2="0,21.7885291152617"
+                    Point3="-4,21.7885291152617" />
+                  <mssgle:LineSegment
+                    End="-97.8333318059642,21.7885291152617" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-97.8333318059642,21.7885291152617"
+                    Point2="-101.833331805964,21.7885291152617"
+                    Point3="-101.833331805964,25.7885291152617" />
+                  <mssgle:LineSegment
+                    End="-101.833331805964,29.2543874974617" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FactSalary Data Flow Task.Paths[Merge Join Output]"
+          TopLeft="406.374995911494,161.56140514435">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="89.2499967031181,0"
+              Start="0,0"
+              End="81.7499967031181,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="81.7499967031181,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactSalary Data Flow Task\FactSalary OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactSalary Data Flow Task\dw OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactSalary Data Flow Task\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[calendar_dim]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactSalary Data Flow Task\dw_distinct OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactSalary Data Flow Task\Lookup 1">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[calendar_dim]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
